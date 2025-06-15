@@ -295,5 +295,14 @@ public class PlayerControllerr : MonoBehaviour
         }
         */
     }
-    
+    private void OnTriggerStay(Collider collision)
+    {
+        Debug.Log("Touched");
+        if (collision.gameObject.tag == "Enemy")
+        {
+            playerhealth--;
+            Debug.Log($"Player health {playerhealth}");
+        }
+    }
+
 }
