@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
         int currentSpawnPoint = Random.Range(0, 5);
         Vector3 enemySpawnPosition = spawnPoints[currentSpawnPoint].GetComponent<Transform>().position;
         Instantiate(enemyPrefab, enemySpawnPosition, Quaternion.identity);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(10f);
         StartCoroutine(nameof(EnemySpawn));
     }
 }

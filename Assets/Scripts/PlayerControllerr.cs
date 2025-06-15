@@ -57,10 +57,10 @@ public class PlayerControllerr : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         currentEquipItem = equipableItems[0];
-        Debug.Log(inventoryitems);
+        //Debug.Log(inventoryitems);
         inventoryitems.Add(equipableItems[0]);
         cheking();
-        Debug.Log(inventoryitems);
+        //Debug.Log(inventoryitems);
     }
     private void EquipRifle()
     {
@@ -129,7 +129,7 @@ public class PlayerControllerr : MonoBehaviour
         text.GetComponent<Text>().text = "Amount of bullets: " + AmountOfBullets.ToString();
         Rotate();
         Move();
-        Health.GetComponent<Text>().text = $"Health {playerhealth}";
+        Health.GetComponent<Text>().text = $"Health: {playerhealth}";
         if (Physics.Raycast(camerA.transform.position, camerA.transform.forward, out hit, 100f))
         {
             if (hit.transform.tag == "Enemy")
@@ -228,7 +228,7 @@ public class PlayerControllerr : MonoBehaviour
         int posX = UnityEngine.Random.Range(19, 51);
         int posZ = UnityEngine.Random.Range(4, 16);
         GameObject thing = Instantiate(thingToSpawn[item], new Vector3(posX, 12, posZ), Quaternion.identity);
-        Debug.Log("thing position: " + thing.transform.position);
+        //Debug.Log("thing position: " + thing.transform.position);
         yield return new WaitForSeconds(5f);
         StartCoroutine(nameof(RandomSpawnOfSurprises));
     }
@@ -275,13 +275,15 @@ public class PlayerControllerr : MonoBehaviour
         camerA.transform.localEulerAngles = new Vector3(CurrentAngle, 0, 0);
         // Debug.Log(camerA.transform.rotation);
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
+        Debug.Log("Touched");
         if (collision.gameObject.tag == "Enemy")
         {
             playerhealth--;
             Debug.Log($"Player health {playerhealth}");
         }
+        /*
         if (collision.gameObject.tag == "Ground")
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -291,6 +293,7 @@ public class PlayerControllerr : MonoBehaviour
             vertticalPosition -= gravitiScale * Time.deltaTime;
             directions.y = vertticalPosition;
         }
+        */
     }
     
 }
